@@ -662,7 +662,182 @@ img{
   font-size:10.5px;
 }
 
-/* ================= RESPONSIVE ================= */
+/* ================= CALENDAR ================= */
+
+.cal-card{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:27px;
+}
+
+.cal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+.cal-head .cal-month{
+  font-size:17px;
+  font-weight:800;
+  color:var(--navy);
+}
+
+.cal-nav-btn{
+  width:32px;
+  height:32px;
+  border-radius:8px;
+  border:1px solid var(--line);
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--navy);
+  cursor:pointer;
+}
+
+.cal-nav-btn:hover{
+  background:var(--bg);
+}
+
+.cal-grid{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+  text-align:center;
+}
+
+.cal-dow{
+  font-size:10.5px;
+  font-weight:800;
+  color:var(--muted);
+  text-transform:uppercase;
+  padding-bottom:8px;
+}
+
+.cal-day{
+  aspect-ratio:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
+  color:var(--text);
+}
+
+.cal-day.empty{
+  visibility:hidden;
+}
+
+.cal-day.event{
+  background:var(--gold2);
+  color:var(--navy2);
+  font-weight:800;
+}
+
+.cal-day.today{
+  background:var(--navy);
+  color:white;
+  font-weight:800;
+}
+
+.cal-legend{
+  margin-top:20px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.cal-legend-item{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:12.5px;
+  color:#3f4a56;
+}
+
+.cal-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--gold);
+  flex-shrink:0;
+}
+
+/* ================= FORM LAPORAN ================= */
+
+.form-card{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:34px;
+  max-width:640px;
+  margin:0 auto;
+}
+
+.form-group{
+  margin-bottom:20px;
+}
+
+.form-group label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  color:var(--navy);
+  margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:12px 14px;
+  font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:13.5px;
+  color:var(--text);
+  background:var(--bg);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  outline:2px solid var(--gold);
+  outline-offset:1px;
+  background:white;
+}
+
+.form-group textarea{
+  resize:vertical;
+  min-height:100px;
+}
+
+.form-submit{
+  width:100%;
+  background:var(--navy);
+  color:white;
+  border:0;
+  padding:14px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+  font-family:'Plus Jakarta Sans',sans-serif;
+}
+
+.form-submit:hover{
+  background:var(--navy2);
+}
+
+.form-note{
+  text-align:center;
+  font-size:11.5px;
+  color:var(--muted);
+  margin-top:14px;
+}
 
 @media(max-width:900px){
 
@@ -778,9 +953,11 @@ Kecamatan Sukasari · Kota Bandung
 <a href="#tentang">TENTANG SIGAP</a>
 <a href="#linimasa">LINIMASA</a>
 <a href="#kegiatan">KEGIATAN</a>
-<a href="#satlinmas">SATLINMAS</a>
+<a href="#kalender">KALENDER</a>
 <a href="#pelaporan">PELAPORAN</a>
 <a href="#kelurahan">KELURAHAN</a>
+<a href="#satlinmas">SATLINMAS</a>
+<a href="#laporan-form">BUAT LAPORAN</a>
 <a href="#kontak">KONTAK</a>
 
 </div>
@@ -1128,6 +1305,89 @@ Koordinasi program kerja dan evaluasi kegiatan Satlinmas.
 </section>
 
 
+<!-- ================= KALENDER ================= -->
+
+<section class="section" id="kalender" style="padding-top:0;">
+
+<div class="container">
+
+<div class="eyebrow">
+Agenda
+</div>
+
+<div class="section-title">
+Kalender Kegiatan
+</div>
+
+<div class="section-line"></div>
+
+
+<div class="home-grid" style="margin-top:25px;">
+
+<div class="cal-card">
+
+<div class="cal-head">
+<div class="cal-nav-btn" id="calPrev">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+</div>
+<div class="cal-month" id="calMonthLabel">Agustus 2026</div>
+<div class="cal-nav-btn" id="calNext">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</div>
+</div>
+
+<div class="cal-grid" id="calGrid">
+<!-- diisi otomatis oleh JavaScript -->
+</div>
+
+<div class="cal-legend" id="calLegend">
+<!-- diisi otomatis oleh JavaScript -->
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="section-header">
+<div class="eyebrow">Mendatang</div>
+<div class="section-title" style="font-size:18px;">Agenda &amp; Jadwal Piket</div>
+<div class="section-line"></div>
+</div>
+
+<div class="timeline">
+
+<div class="timeline-item">
+<div class="timeline-date">25 Agustus 2026</div>
+<div class="timeline-title">Maulid Nabi Muhammad SAW</div>
+<div class="timeline-desc">Hari libur nasional — kegiatan piket disesuaikan.</div>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-date">27 Agustus 2026</div>
+<div class="timeline-title">Piket Malam Satlinmas RW 05–08</div>
+<div class="timeline-desc">Jadwal rutin patroli malam wilayah barat.</div>
+</div>
+
+<div class="timeline-item">
+<div class="timeline-date">30 Agustus 2026</div>
+<div class="timeline-title">Rapat Evaluasi Bulanan</div>
+<div class="timeline-desc">Evaluasi kegiatan Satlinmas & pelaporan warga bulan Agustus.</div>
+</div>
+
+</div>
+
+<a href="#satlinmas" class="full-button">Lihat Jadwal Lengkap</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
 <!-- ================= CTA ================= -->
 
 <section class="cta" id="pelaporan">
@@ -1148,13 +1408,14 @@ Dokumentasikan kegiatan dan kejadian di wilayah secara digital.
 </div>
 
 
-<a href="#" class="btn btn-primary">
-Buka Pelaporan →
+<a href="#laporan-form" class="btn btn-primary">
+Buat Laporan →
 </a>
 
 </div>
 
 </section>
+
 
 
 <!-- ================= PROFIL ================= -->
@@ -1363,6 +1624,64 @@ Galeri Kegiatan Satlinmas
 </section>
 
 
+<!-- ================= FORM LAPORAN ================= -->
+
+<section class="section" id="laporan-form">
+
+<div class="container">
+
+<div style="text-align:center; margin-bottom:30px;">
+<div class="eyebrow" style="text-align:center;">Pelaporan Harian</div>
+<div class="section-title">Buat Laporan</div>
+<div class="section-line" style="margin-left:auto; margin-right:auto;"></div>
+<p style="margin-top:14px; color:var(--muted); font-size:14px;">Isi formulir di bawah ini untuk menyampaikan laporan kejadian di wilayah Anda.</p>
+</div>
+
+<form class="form-card" id="laporanForm">
+
+<div class="form-group">
+<label for="namaLengkap">Nama Lengkap</label>
+<input type="text" id="namaLengkap" name="namaLengkap" placeholder="Masukkan nama lengkap Anda" required>
+</div>
+
+<div class="form-group">
+<label for="nomorTelepon">Nomor Telepon</label>
+<input type="tel" id="nomorTelepon" name="nomorTelepon" placeholder="Contoh: 081234567890" required>
+</div>
+
+<div class="form-group">
+<label for="kategoriLaporan">Kategori Laporan</label>
+<select id="kategoriLaporan" name="kategoriLaporan" required>
+<option value="" selected disabled>-- Pilih Kategori --</option>
+<option value="keamanan">Keamanan Lingkungan</option>
+<option value="ketertiban">Ketertiban Umum</option>
+<option value="kebersihan">Kebersihan Lingkungan</option>
+<option value="fasilitas">Kerusakan Fasilitas Umum</option>
+<option value="lainnya">Lainnya</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="lokasiKejadian">Lokasi Kejadian</label>
+<input type="text" id="lokasiKejadian" name="lokasiKejadian" placeholder="Contoh: RW 05, Jalan Setrasari" required>
+</div>
+
+<div class="form-group">
+<label for="deskripsiLaporan">Deskripsi Laporan</label>
+<textarea id="deskripsiLaporan" name="deskripsiLaporan" placeholder="Jelaskan kejadian secara singkat dan jelas" required></textarea>
+</div>
+
+<button type="submit" class="form-submit">Kirim Laporan</button>
+
+<p class="form-note">Laporan Anda akan diteruskan ke petugas Satlinmas Kelurahan Sukarasa.</p>
+
+</form>
+
+</div>
+
+</section>
+
+
 <!-- ================= FOOTER ================= -->
 
 <footer class="footer" id="kontak">
@@ -1441,6 +1760,122 @@ Kecamatan Sukasari · Kota Bandung
 
 </footer>
 
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+
+/* ---------- KALENDER ---------- */
+
+const calEvents = {
+  "2026-8-17": "Hari Kemerdekaan Republik Indonesia",
+  "2026-8-25": "Maulid Nabi Muhammad SAW"
+};
+
+let calViewYear = 2026;
+let calViewMonth = 7; // 0-indexed: Agustus = 7
+
+const bulanNama = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+const hariNama = ["Min","Sen","Sel","Rab","Kam","Jum","Sab"];
+
+function renderCalendar(){
+  const grid = document.getElementById('calGrid');
+  const legend = document.getElementById('calLegend');
+  const label = document.getElementById('calMonthLabel');
+  if(!grid) return;
+
+  label.textContent = bulanNama[calViewMonth] + " " + calViewYear;
+
+  const firstDay = new Date(calViewYear, calViewMonth, 1).getDay();
+  const daysInMonth = new Date(calViewYear, calViewMonth + 1, 0).getDate();
+  const today = new Date();
+  const isCurrentMonth = today.getFullYear() === calViewYear && today.getMonth() === calViewMonth;
+
+  let html = "";
+  hariNama.forEach(h => html += '<div class="cal-dow">' + h + '</div>');
+
+  for(let i = 0; i < firstDay; i++){
+    html += '<div class="cal-day empty"></div>';
+  }
+
+  for(let d = 1; d <= daysInMonth; d++){
+    const key = calViewYear + "-" + (calViewMonth + 1) + "-" + d;
+    let cls = "cal-day";
+    if(isCurrentMonth && d === today.getDate()) cls += " today";
+    else if(calEvents[key]) cls += " event";
+    html += '<div class="' + cls + '">' + d + '</div>';
+  }
+
+  grid.innerHTML = html;
+
+  let legendHtml = "";
+  Object.keys(calEvents).forEach(key => {
+    const parts = key.split("-");
+    if(parseInt(parts[0]) === calViewYear && (parseInt(parts[1]) - 1) === calViewMonth){
+      legendHtml += '<div class="cal-legend-item"><span class="cal-dot"></span>' + parts[2] + ' ' + bulanNama[calViewMonth] + ' — ' + calEvents[key] + '</div>';
+    }
+  });
+  legend.innerHTML = legendHtml;
+}
+
+document.getElementById('calPrev').addEventListener('click', function(){
+  calViewMonth--;
+  if(calViewMonth < 0){ calViewMonth = 11; calViewYear--; }
+  renderCalendar();
+});
+
+document.getElementById('calNext').addEventListener('click', function(){
+  calViewMonth++;
+  if(calViewMonth > 11){ calViewMonth = 0; calViewYear++; }
+  renderCalendar();
+});
+
+renderCalendar();
+
+
+/* ---------- FORM LAPORAN ---------- */
+
+document.getElementById('laporanForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  alert('Laporan Anda sedang diproses. Untuk pengiriman resmi, laporan akan diteruskan melalui sistem pelaporan Satlinmas Kelurahan Sukarasa.');
+  this.reset();
+});
+
+
+/* ---------- NAVBAR AKTIF ---------- */
+
+const navLinks = document.querySelectorAll('.menu a');
+
+navLinks.forEach(link => {
+  link.addEventListener('click', function(){
+    navLinks.forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+const observedSections = document.querySelectorAll('section[id], header[id], footer[id]');
+
+const navObserver = new IntersectionObserver(function(entries){
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const id = entry.target.getAttribute('id');
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+
+observedSections.forEach(sec => navObserver.observe(sec));
+
+window.addEventListener('scroll', function(){
+  if(window.scrollY < 40){
+    navLinks.forEach(l => l.classList.remove('active'));
+    navLinks[0].classList.add('active');
+  }
+});
+
+</script>
 
 </body>
 </html>
